@@ -8,7 +8,7 @@ Windows; projeto C:/Users/Acer/OneDrive/Área de Trabalho/loja.manancial. Node 2
 
 Repositório fornecido pelo responsável: https://github.com/joaoo-IA/lojamancial.git, branch main. A API oficial GitHub confirmou que ele é público. OAuth padrão public_repo; não foi alterada a visibilidade.
 
-## Resultados atuais
+## Resultados locais da preparação inicial
 
 | Comando/verificação | Resultado |
 | --- | --- |
@@ -45,7 +45,7 @@ Sem variáveis do ambiente OAuth, o endpoint bloqueia o login; sem endereço ofi
 
 /publicacao/ mostra commit, ambiente, branch e horário da versão servida, com links aos checks GitHub e ao painel Cloudflare. Ela declara que não consulta automaticamente o estado do último deploy. Sucesso exige check concluído para o mesmo commit e conferência da versão ativa; erro exige consulta aos logs oficiais. Ausência de check não é sucesso.
 
-## Não executado e dependências
+## Pendências registradas antes do primeiro deploy
 
 - Projeto Cloudflare Pages ainda depende da conexão pelo responsável, que já possui conta.
 - Aplicativo OAuth, secrets, origem oficial e logins autorizados ainda precisam ser configurados.
@@ -56,3 +56,116 @@ Sem variáveis do ambiente OAuth, o endpoint bloqueia o login; sem endereço ofi
 - Nenhum pagamento, estoque, carrinho, WhatsApp ou catálogo completo foi implementado nesta prova.
 
 Próximo passo: seguir configuracao-cloudflare.md, obter o endereço pages.dev, configurar OAuth e executar roteiro-demonstracao.md. Parar para revisão do responsável antes de completar a loja.
+
+
+## Retomada remota em 23/11/2026
+
+Estado atual: primeiro deploy e revisão visual pública confirmados; configuração OAuth e demonstração autenticada pendentes da interação do responsável.
+
+Origem: o responsável informou o deploy de d7737a0 e autorizou continuar OAuth, orientar as etapas manuais, validar cadastro/edições/ocultação pelo painel e concluir a revisão visual.
+
+### Deploy e publicação
+
+- URL oficial: https://lojamancial.pages.dev.
+- /build-info.json confirmou commit d7737a0df28f37d5c5bb0ea79fcaa9e4ee07086d, branch main, ambiente cloudflare e geração em 2026-11-23T21:01:41.874Z (18:01:41 em Brasília).
+- API pública GitHub: check Cloudflare Pages concluído com sucesso.
+- Existe também o check separado Workers Builds: lojamancial, concluído com falha. Para esta prova, acompanhar o projeto Pages e o check Cloudflare Pages. Nenhum recurso ou integração foi removido.
+- /admin/config.json ainda apontava para configurar-endereco.invalid; /api/oauth/auth retornou 503 na conferência inicial, sem consultar nem exibir secrets.
+- O botão Atualizar versão ativa respondeu com a mensagem de versão atual. A página continua declarando que o estado do último deploy deve ser conferido nos checks oficiais.
+
+### Revisão visual pública atual
+
+Navegador real disponível nesta retomada, superando a limitação da preparação local.
+
+- Vitrine: capturas em 1440 px e 390 px; também conferida em 320 px.
+- Página de produto: conferida visualmente em 1440 px e 390 px.
+- Publicações: conferida visualmente em 1440 px e 390 px.
+- Orientações de acesso: conferidas visualmente em 1440 px e 390 px.
+- Imagem ilustrativa carregou; não foi observada rolagem horizontal nem conteúdo cortado nas telas conferidas.
+- Capturas locais em artifacts/visual/2026-11-23-oauth (fora do Git).
+- Esses testes não equivalem a uma auditoria completa de acessibilidade nem a testes em aparelhos físicos.
+
+### Interação necessária para OAuth
+
+Foram fornecidos ao responsável o endereço da criação do OAuth App, a homepage e o callback exatos, a lista de variáveis de Production e a instrução de salvar GITHUB_CLIENT_SECRET como Secret diretamente no Cloudflare. Nenhum segredo foi solicitado no chat ou salvo no repositório.
+
+A conta administrativa sugerida joaoo-IA aguarda confirmação explícita; ela não foi autorizada automaticamente a partir do proprietário do repositório. PUBLIC_SITE_URL e SITE_URL devem ser https://lojamancial.pages.dev e CMS_GITHUB_SCOPE deve ser public_repo.
+
+Cadastro, alteração de preço/foto, ocultação e confirmação de cada publicação pelo painel ainda não foram executados nesta retomada. Os testes locais anteriores continuam separados da evidência remota.
+
+Não houve alteração de código de aplicação ou de produtos nesta parte da retomada. Próximo passo: confirmar a configuração e o administrador, autenticar no painel por interação do responsável e executar a demonstração autorizada antes da revisão.
+
+
+## Diagnóstico do carregamento do CMS após o redeploy
+
+Relato do responsável: a vitrine abriu, mas o painel apresentou erro ao carregar a configuração.
+
+Conferência por HTTP: /admin/config.json respondeu 200, com base_url=https://lojamancial.pages.dev e scope=public_repo. /api/oauth/auth?provider=github respondeu 302 para github.com. Isso comprova apenas o início do OAuth, não a troca de código, a validade do Client Secret ou a autorização de uma conta.
+
+O navegador reproduziu: Error: Missing external media library 'default'. Please use 'registerMediaLibrary' to register it.
+
+Causa: a configuração inicial definia media_library.name=default no nível global. Esse campo seleciona plugins externos registrados, e default não é um desses plugins. A biblioteca local do Decap é implícita.
+
+Correção local: removida somente a seleção global inválida. Foto principal mantém limite de 5 MB e a validação de imagens no build permanece ativa. Nenhuma credencial ou role administrativa foi alterada.
+
+Verificação: npm run build passou (22 arquivos, zero erros/avisos, 12 testes aprovados, geração estática e verificação da saída). Com o endereço público configurado no build local, o navegador exibiu Entrar com o GitHub, sem o erro de configuração.
+
+Publicação ainda não realizada: a revisão automática de permissões rejeitou o comando de commit/push para main por exigir autorização explícita para essa publicação. A correção permanece local, pronta para revisão e aprovação; não houve tentativa de contornar a rejeição.
+
+Próximos critérios: autorizar/publicar a correção, verificar o check Cloudflare Pages e o botão no endereço oficial; concluir login real pela interação do responsável; depois executar cadastro, alteração de preço/foto e ocultação com verificação de cada publicação. Autenticação completa e operações administrativas continuam pendentes.
+
+### Decisão após revisão da correção
+
+O responsável respondeu explicitamente Manter a correção apenas local à pergunta sobre criar commit e publicar na main. A correção permanece sem commit e sem push; HEAD continua d7737a0. A versão pública continua com a seleção global inválida até eventual publicação futura autorizada. A prévia local foi encerrada após a validação. O teste real de login e as alterações pelo painel não foram realizados.
+
+
+## Revisão local solicitada e autorização por entrega
+
+Em 23/11/2026, o responsável esclareceu que cada entrega deve ser visualizada/testada antes de autorização específica de commit e push. Autorizações anteriores não são permanentes. Operações pelo CMS que publiquem conteúdo exigem autorização própria da sequência. Ver ADR-002.
+
+Aplicação iniciada em http://127.0.0.1:4321/ e painel em http://127.0.0.1:4321/admin/. O servidor permanece ativo para a revisão solicitada.
+
+Verificações desta revisão: respostas HTTP 200 para vitrine, painel, orientações e publicações; build existente contém a correção, sem seletor global de biblioteca externa; limite de foto 5 MB preservado. No navegador, aparece Entrar com o GitHub, sem erro de configuração. Não houve instalação de dependências nem repetição dos testes/build, pois o código desta correção permanece igual ao já verificado na etapa anterior.
+
+Não foi efetuado login nem gravação pelo CMS. A configuração atual ainda usa backend.branch=main; a proposta de prévia isolada exige parametrização e validação dessa branch antes de testes que gerem commits. O fluxo OAuth atual exige origem HTTPS consistente e Pages Functions; o preview estático loopback não valida o ciclo completo.
+
+A proposta de callback e isolamento consta em revisao-local-e-previa-oauth.md e ainda não foi implementada ou publicada. Permanece pendente o retorno sobre a visualização, a aprovação específica do próximo commit/push e a autorização da sequência de teste pelo CMS.
+
+
+## Verificação atual da correção OAuth — 23/11/2026
+
+Comandos locais: npm run build (com Node 24.22.3 fornecido pelo Codex e telemetria desativada) e git diff --check. Resultado: 22 arquivos verificados, zero erros/avisos, 14 testes aprovados, build estático e verificação da saída aprovados. Os testes usam credenciais fictícias e fetch simulado; não comprovam login real ou correspondência do Secret do Cloudflare.
+
+Foi gerado novamente somente o artefato estático com PUBLIC_SITE_URL=https://lojamancial.pages.dev, CMS_GITHUB_SCOPE=public_repo e CMS_LOCAL_BACKEND=false, seguido de scripts/verify-output.mjs. Isso preserva na prévia local a configuração pública correta, sem incluir secrets. Nenhuma dependência foi instalada. A prévia permanece em http://127.0.0.1:4321/ e http://127.0.0.1:4321/admin/; não executa Pages Functions.
+
+A inspeção HTTP confirmou o Client ID público com LF final, callback correto e branch main. O responsável confirmou a substituição do Secret, depois nova gravação do ID em Production e retry. A URL ainda retornou o mesmo valor e build de 20h12min49s. Os detalhes enviados identificaram a implantação 7b1604dd-20ad-42d0-bb5d-b719e3caec0a, concluída às 20h13, branch main, commit d7737a0: ela corresponde à versão já observada. Foi solicitado iniciar nova execução e informar seu novo ID; não foi pedido segredo.
+
+A autorização de joaoo-IA como administrador foi explicitada pelo responsável nesta solicitação; a menção anterior de confirmação pendente é histórica. O valor remoto de ADMIN_GITHUB_USERS e o ciclo completo de login ainda não foram verificados. A seleção do OAuth App pelo ID, seu callback cadastrado e a origem do Secret substituído continuam sujeitos à confirmação sem exposição do segredo.
+
+Correções desta entrega: normalização e validação do Client ID em server/oauth.ts; duas regressões em tests/oauth.test.mjs. Mantida a correção local anterior em src/pages/admin/config.json.ts. Diagnóstico e fontes em diagnostico-oauth-404.md; plano ativo atualizado. Não houve commit, push, login autenticado ou gravação de catálogo pelo agente. HEAD segue d7737a0. Cadastro, preço/foto, ocultação e publicação real pelo CMS permanecem pendentes, assim como a aprovação específica da publicação de código e a autorização separada da sequência de teste.
+
+Smoke após recomposição do artefato: vitrine, painel, orientações e publicações locais responderam HTTP 200; base_url local confere com o domínio oficial e a biblioteca externa inválida está ausente. Callback público sem state/cookie respondeu 403 esperado, confirmando a rota e sua rejeição inicial, sem troca de código/token.
+
+
+## Nova implantação confirmada — 23/11/2026, 20h33
+
+O responsável forneceu os detalhes de 391add8c-7d36-4202-847f-da7b4b9ab22a, Production/main, commit d7737a0, concluída com sucesso às 20h33. HTTP em https://lojamancial.pages.dev/build-info.json confirmou geração 2026-11-23T23:33:19.334Z; portanto a nova implantação chegou à origem pública. A Function de autorização ainda respondeu 302 com Client ID de 21 caracteres, incluindo LF final, e callback correto. Isso supera a hipótese de que somente a versão anterior estivesse sendo consultada. Não comprova se o retry reutilizou configuração anterior ou se o valor salvo no projeto ainda contém LF. Nenhuma nova rotação de Secret é indicada pelas evidências desta etapa. Nenhuma correção local foi publicada.
+
+
+## Client ID corrigido em produção — 23/11/2026, 20h41
+
+Após o responsável informar nova correção e publicação, a conferência HTTP de /api/oauth/auth?provider=github confirmou 302 para github.com/login/oauth/authorize, Client ID com exatamente 20 caracteres, sem LF e idêntico ao informado. Callback: https://lojamancial.pages.dev/api/oauth/callback. /build-info.json confirmou geração 2026-11-23T23:41:58.049Z, branch main e commit d7737a0. Resolvido o defeito observável de formatação do ID no redirecionamento de produção. Isso ainda não comprova o login autenticado, a correspondência do Secret nem a autorização de escrita. Próximo passo: teste somente de login pelo responsável no painel oficial e relato do resultado; operações de catálogo continuam aguardando autorização própria. Correções locais de código permanecem sem commit/push.
+
+
+## Bloqueio atual do painel — configuração Decap
+
+Após o Client ID ser corrigido, a captura do responsável mostrou Missing external media library default. Comparação HTTP atual: painel e config.json responderam 200 tanto localmente quanto em produção; somente a produção mantém media_library.name=default. A configuração local não contém esse seletor; ambas preservam 5242880 bytes como limite da foto. A correção local não foi publicada por decisão explícita anterior. O teste de login sugerido dependia dessa correção e foi prematuro.
+
+Prévia para revisão: http://127.0.0.1:4321/admin/. Código de aplicação permanece igual ao verificado anteriormente com 14 testes, tipos e build aprovados; nesta conferência foram feitos apenas inspeção do diff e HTTP, sem repetir testes ou instalar dependências. Próxima entrega submetida à revisão: correção Decap, normalização defensiva do Client ID, regressões e documentação local; eventual commit/push para main aciona produção e exige aprovação específica. Nenhuma gravação pelo CMS está incluída nessa aprovação. Depois da publicação autorizada, conferir primeiro o carregamento do painel e então testar login; sequência real de cadastro/preço/foto/ocultação continua pendente de autorização própria.
+
+
+## Autorização específica desta entrega — 23/11/2026
+
+O responsável declarou: Autorizo o commit e o push dessas correções para a main e o deploy. Depois confira o painel público e me envie o link funcionando. Escopo: correção da seleção inválida de biblioteca do Decap, normalização defensiva do Client ID nas duas etapas OAuth, testes de regressão e documentação já apresentada. Destino: main de joaoo-IA/lojamancial, acionando o Cloudflare Pages de produção. Esta autorização vale somente para essa entrega e não inclui salvar produtos ou imagens pelo CMS.
+
+Verificações locais anteriores desta mesma versão de código: 22 arquivos sem erros/avisos, 14 testes e build aprovados. Na revisão de publicação: diff e destino conferidos; origin/main atualizado sem divergência; não houve instalação de dependências ou mudança de produtos. Próximo critério: confirmar o commit servido em build-info.json e observar o painel público sem o erro de configuração. Login real e prova do catálogo continuam como etapas próprias.

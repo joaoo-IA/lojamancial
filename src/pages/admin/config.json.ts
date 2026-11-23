@@ -7,7 +7,7 @@ export const GET: APIRoute = () => {
   backend: {name:'github',repo:'joaoo-IA/lojamancial',branch:'main',base_url:site || 'https://configurar-endereco.invalid',auth_endpoint:'api/oauth/auth',auth_scope:import.meta.env.CMS_GITHUB_SCOPE || 'public_repo',commit_messages:{create:'catalogo: cadastrar {{collection}} {{slug}}',update:'catalogo: atualizar {{collection}} {{slug}}',delete:'catalogo: remover {{collection}} {{slug}}',uploadMedia:'catalogo: adicionar imagem {{path}}',deleteMedia:'catalogo: remover imagem {{path}}'}},
   ...(local ? {local_backend:{url:'http://localhost:8081/api/v1',allowed_hosts:['localhost','127.0.0.1']}} : {}),
   media_folder:'public/media', public_folder:'/media',
-  media_library:{name:'default',config:{max_file_size:5242880}},
+  // A biblioteca local é implícita; media_library.name seleciona somente plugins externos registrados.
   publish_mode:'simple',
   collections:[{name:'produtos',label:'Produtos',label_singular:'Produto',folder:'src/content/produtos',format:'json',extension:'json',create:true,delete:false,identifier_field:'id',slug:'{{id}}',summary:'{{nome}} · {{precoCentavos}} centavos · visível: {{visivel}}',editor:{preview:false},fields:[
    {label:'Identificador estável',name:'id',widget:'uuid',read_only:true,hint:'Gerado automaticamente. Não muda nas edições.'},

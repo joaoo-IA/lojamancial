@@ -7,13 +7,15 @@ const random = () => Array.from(crypto.getRandomValues(new Uint8Array(32)), b =>
 const fail = (message: string, status = 400) => new Response(message, {status,headers:{...baseHeaders,'Content-Type':'text/plain; charset=utf-8','Set-Cookie':clearCookie}});
 function config(env: OAuthEnv) {
  if (!env.SITE_URL || !env.GITHUB_CLIENT_ID || !env.GITHUB_CLIENT_SECRET || !env.ADMIN_GITHUB_USERS?.trim()) throw new Error('Configuração administrativa incompleta.');
+ const clientId = env.GITHUB_CLIENT_ID.trim();
+ if (!/^[A-Za-z0-9_-]+$/.test(clientId)) throw new Error('Client ID inválido.');
  const site = new URL(env.SITE_URL);
  if (site.protocol !== 'https:' || site.pathname !== '/' || site.search || site.hash || site.username || site.password) throw new Error('Origem inválida.');
  const admins = env.ADMIN_GITHUB_USERS.split(',').map(x => x.trim().toLowerCase()).filter(Boolean);
  if (!admins.length) throw new Error('Sem administradores.');
  const scope = env.CMS_GITHUB_SCOPE || 'public_repo';
  if (!['repo','public_repo'].includes(scope)) throw new Error('Escopo inválido.');
- return {site,admins,scope};
+ return {site,admins,scope,clientId};
 }
 async function challenge(verifier: string) {
  const digest = new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(verifier)));
@@ -37,7 +39,7 @@ export async function handleOAuth(request: Request, env: OAuthEnv, fetcher: type
   if (url.searchParams.get('provider') !== 'github') return fail('Provedor inválido.');
   const state = random(); const verifier = random();
   const authorize = new URL('https://github.com/login/oauth/authorize');
-  authorize.search = new URLSearchParams({client_id:env.GITHUB_CLIENT_ID!,redirect_uri:callback,scope:settings.scope,state,code_challenge:await challenge(verifier),code_challenge_method:'S256',allow_signup:'false'}).toString();
+  authorize.search = new URLSearchParams({client_id:settings.clientId,redirect_uri:callback,scope:settings.scope,state,code_challenge:await challenge(verifier),code_challenge_method:'S256',allow_signup:'false'}).toString();
   return new Response(null,{status:302,headers:{...baseHeaders,Location:authorize.href,'Set-Cookie':cookieName+'='+state+'.'+verifier+'; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=600'}});
  }
  if (url.pathname !== '/api/oauth/callback') return fail('Rota inexistente.',404);
@@ -47,7 +49,7 @@ export async function handleOAuth(request: Request, env: OAuthEnv, fetcher: type
  const code = url.searchParams.get('code');
  if (!code || url.searchParams.has('error')) return fail('A autorização não foi concluída. Volte ao painel para tentar novamente.',403);
  try {
-  const tokenResponse = await fetcher('https://github.com/login/oauth/access_token',{method:'POST',headers:{Accept:'application/json','Content-Type':'application/json'},body:JSON.stringify({client_id:env.GITHUB_CLIENT_ID,client_secret:env.GITHUB_CLIENT_SECRET,code,redirect_uri:callback,code_verifier:verifier}),signal:AbortSignal.timeout(10000)});
+  const tokenResponse = await fetcher('https://github.com/login/oauth/access_token',{method:'POST',headers:{Accept:'application/json','Content-Type':'application/json'},body:JSON.stringify({client_id:settings.clientId,client_secret:env.GITHUB_CLIENT_SECRET,code,redirect_uri:callback,code_verifier:verifier}),signal:AbortSignal.timeout(10000)});
   if (!tokenResponse.ok) return fail('Não foi possível concluir a autorização GitHub.',502);
   const payload = await tokenResponse.json() as {access_token?:string;error?:string};
   if (!payload.access_token || payload.error) return fail('Autorização recusada pelo GitHub.',403);
