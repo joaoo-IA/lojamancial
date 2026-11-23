@@ -1,0 +1,18 @@
+{
+  "id": "2be769c7-13f6-4edf-bbf3-e23e3c5b6f20",
+  "nome": "Conjunto Essencial",
+  "descricao": "Top e legging para acompanhar o movimento do seu dia. Produto demonstrativo, sem oferta de venda nesta etapa.",
+  "precoCentavos": 14990,
+  "categoria": "Conjuntos",
+  "visivel": true,
+  "foto": "/media/conjunto-grafite.svg",
+  "fotoAlt": "Ilustração de um top e uma legging na cor grafite",
+  "pecasIncluidas": "Top e legging",
+  "variacoes": [
+    {
+      "id": "demo-preto-m",
+      "cor": "Preto",
+      "tamanho": "M"
+    }
+  ]
+}

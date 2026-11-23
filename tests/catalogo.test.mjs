@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync,mkdtempSync,mkdirSync,writeFileSync,rmSync,realpathSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join,dirname} from 'node:path';
+import {validarProduto,validarFoto,publicados} from '../src/lib/catalogo.ts';
+const fixture=JSON.parse(readFileSync(new URL('./fixtures/produto.json',import.meta.url),'utf8'));
+test('preço precisa ser inteiro positivo em centavos',()=>{for(const precoCentavos of [0,-1,1.5,'14990',NaN]) assert.throws(()=>validarProduto({...fixture,precoCentavos})); assert.equal(validarProduto(fixture).precoCentavos,14990);});
+test('ocultar remove produto de todos os consumidores do catálogo público',()=>{assert.equal(publicados([fixture]).length,1);assert.deepEqual(publicados([{...fixture,visivel:false}]),[]);});
+test('caminhos externos e traversal não são aceitos como foto',()=>{for(const foto of ['https://exemplo.test/foto.png','/media/../segredo.png','/media/foto.svg?x=1','/media/%2e%2e.png']) assert.throws(()=>validarProduto({...fixture,foto}));});
+test('variações vazias ou repetidas impedem a publicação',()=>{assert.throws(()=>validarProduto({...fixture,variacoes:[]}));assert.throws(()=>validarProduto({...fixture,variacoes:[fixture.variacoes[0],fixture.variacoes[0]]}));});
+test('a assinatura da imagem deve corresponder à extensão e SVG enviado é recusado',()=>{const root=mkdtempSync(join(tmpdir(),'loja-foto-'));try{mkdirSync(join(root,'public/media'),{recursive:true});writeFileSync(join(root,'public/media/falsa.png'),'isto não é uma foto');writeFileSync(join(root,'public/media/upload.svg'),'<svg/>');assert.throws(()=>validarFoto('/media/falsa.png',root));assert.throws(()=>validarFoto('/media/upload.svg',root));}finally{assert.equal(dirname(realpathSync(root)),realpathSync(tmpdir()));assert.match(root.split(/[\\\\/]/).at(-1),/^loja-foto-/);rmSync(root,{recursive:true,force:true});}});

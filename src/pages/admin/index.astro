@@ -1,0 +1,15 @@
+---
+const local = import.meta.env.DEV && import.meta.env.CMS_LOCAL_BACKEND === 'true';
+---
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="robots" content="noindex,nofollow" /><title>Painel · LOJA</title><style is:global>body{margin:0;font-family:Arial,Helvetica,sans-serif}#cms-toolbar{background:#191919;color:white;padding:12px 20px;font-size:14px;display:flex;gap:20px;justify-content:space-between;flex-wrap:wrap}#cms-toolbar a{color:white}#cms-toolbar p{margin:0}#cms-error{padding:32px}#nc-root{position:relative}</style></head><body><div id="cms-toolbar"><p>{local ? 'MODO LOCAL · grava arquivos neste computador · não publica no Cloudflare' : 'LOJA · Administração · salvar inicia a publicação, mas não confirma conclusão'}</p><nav><a href="/publicacao/" target="_blank" rel="noreferrer">Publicações</a> · <a href="/" target="_blank" rel="noreferrer">Ver vitrine</a> · <a href="/administracao/" target="_blank" rel="noreferrer">Ajuda</a></nav></div><div id="cms-error" role="alert" hidden>Não foi possível carregar o painel. Confira a conexão e recarregue a página.</div><div id="nc-root"></div><script is:inline>window.CMS_MANUAL_INIT = true;</script><script is:inline src="/vendor/decap-cms.js" onerror="document.getElementById('cms-error').hidden=false"></script><script is:inline>
+(async () => {
+ if (!window.CMS) return;
+ try {
+  const response = await fetch('/admin/config.json', {cache:'no-store'});
+  if (!response.ok) throw new Error('config');
+  const config = await response.json();
+  if (config.backend.base_url.includes('configurar-endereco.invalid')) { const message = document.getElementById('cms-error'); message.hidden = false; message.textContent = 'O painel aguarda a configuração do endereço oficial e do acesso GitHub. A vitrine pode ser publicada primeiro; consulte docs/configuracao-cloudflare.md no repositório.'; return; }
+  window.CMS.init({config});
+ } catch { document.getElementById('cms-error').hidden=false; }
+})();
+</script></body></html>

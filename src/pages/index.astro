@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import { carregarCatalogo, publicados, dinheiro } from '../lib/catalogo';
+const produtos = publicados(carregarCatalogo());
+---
+<Base title="Uma coleção em movimento">
+<section class="hero shell"><div><p class="eyebrow">Peças que acompanham você</p><h1>Do treino.<br />Para a vida.</h1></div><div class="hero-copy"><p>Conforto, simplicidade e liberdade para o seu cotidiano.</p><span class="pill">Primeiro olhar · coleção ilustrativa</span></div></section>
+<section class="product-section shell" id="produto" aria-labelledby="colecao"><div class="section-head"><p id="colecao">A coleção</p><p>{produtos.length} {produtos.length === 1 ? 'produto' : 'produtos'}</p></div>
+{produtos.length ? produtos.map(p => <article class="product" data-product-id={p.id}><a class="product-art" href={'/produto/' + p.id + '/'} aria-label={'Ver ' + p.nome}><img src={p.foto} alt={p.fotoAlt} width="800" height="900" fetchpriority="high" /><span class="art-label">IMAGEM ILUSTRATIVA</span></a><div class="product-details"><p class="eyebrow">{p.categoria}</p><h2>{p.nome}</h2><p class="price">{dinheiro(p.precoCentavos)}</p><p class="description">{p.descricao}</p><dl class="product-meta"><div><dt>O conjunto inclui</dt><dd>{p.pecasIncluidas}</dd></div><div><dt>Variação de exemplo</dt><dd>{p.variacoes[0].cor} · {p.variacoes[0].tamanho}</dd></div></dl><p class="demo-note">Este produto demonstra a atualização do catálogo. A compra será habilitada em uma próxima etapa.</p><p style="margin:20px 0 0"><a class="quiet-link" href={'/produto/' + p.id + '/'}>Conhecer a peça</a></p></div></article>) : <div class="empty-state"><p class="eyebrow">Uma pausa na coleção</p><h2>Novidades em preparação.</h2><p>Não há produtos publicados no momento. Volte em breve.</p></div>}
+</section>
+<section class="explainer"><div class="shell"><h2>Uma loja simples.<br />Um catálogo de verdade.</h2><p>Esta primeira versão permite conferir a ligação entre o painel e a vitrine. Depois de publicar uma alteração, acompanhe o processamento e confirme a versão que está no ar em <a href="/publicacao/">Publicações</a>.</p></div></section>
+</Base>

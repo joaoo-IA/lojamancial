@@ -1,0 +1,29 @@
+{
+  "name": "loja-manancial-prova",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.22.3"
+  },
+  "scripts": {
+    "dev": "npm run prepare:cms && astro dev --host 127.0.0.1",
+    "preview": "astro preview --host 127.0.0.1",
+    "cms:local": "decap-server",
+    "prepare:cms": "node scripts/prepare-cms.mjs",
+    "check": "astro check",
+    "test": "node --test tests/*.test.mjs",
+    "build": "npm run prepare:cms && npm run check && npm test && astro build && node scripts/verify-output.mjs",
+    "verify:flows": "node scripts/verify-flows.mjs"
+  },
+  "dependencies": {
+    "astro": "7.4.13"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@types/estree": "1.0.8",
+    "@types/node": "^24.0.0",
+    "decap-server": "3.11.6",
+    "typescript": "6.0.3"
+  }
+}
