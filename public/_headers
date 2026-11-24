@@ -13,3 +13,17 @@
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# HTML mutável: não conservar ofertas antigas nem 404 após reativação.
+/
+  Cache-Control: no-store
+  CDN-Cache-Control: no-store
+  Cloudflare-CDN-Cache-Control: no-store
+/produto/*
+  Cache-Control: no-store
+  CDN-Cache-Control: no-store
+  Cloudflare-CDN-Cache-Control: no-store
+/404.html
+  Cache-Control: no-store
+  CDN-Cache-Control: no-store
+  Cloudflare-CDN-Cache-Control: no-store

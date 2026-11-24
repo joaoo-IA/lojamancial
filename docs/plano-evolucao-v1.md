@@ -202,3 +202,24 @@ Entrega, capturas, roteiro e limites em [entrega-e0.md](entrega-e0.md). Observad
 O responsável confirmou a revisão local dos campos/controles e autorizou explicitamente commit e push da E0 e documentação para main, acompanhamento do deploy e conferência do editor publicado. Autorização desta entrega; não abrange gravações E1. Produto local adicional a6398c21-beed-4eae-84db-ef2f88123d64.json encontrado como untracked na retomada: preservado, não staged/não publicado. Ele não informa variacoes e não foi incluído na validação/build histórico da E0; não corrigir ou remover por inferência. A validação Cloudflare usará somente conteúdo versionado.
 
 Implementação de aplicação mantém-se idêntica à versão local já verificada com tipos, 14 testes e build aprovados. Revisão atual: Git/diff conferidos, main sem divergência de origin/main; nenhuma dependência instalada. Publicação em andamento.
+
+
+## E0 publicada e conferida; E1 preparada
+
+Commit 03af6523a19cdb7a31d707fcfe06cea5b6800189 criado e enviado para main sob autorização específica. Check Cloudflare Pages completed/success; produção confirmou o commit e geração 2026-11-24T01:49:35.286Z (23/11/2026, 22h49min35s em Brasília). No navegador público autenticado, entrada original carregada com formulário visível, 11 campos input/textarea, root 673,5 px e largura 1280 px numa viewport 1280 × 720. Captura em artifacts/e0-publicada/editor-publico.jpg. Nenhum campo alterado ou ação de salvar/publicar executada. HTTP confirmou que catálogo público continua com apenas o produto original a 14990 centavos.
+
+E0 aceita localmente pelo responsável e publicada; reflexos de gravação do CMS na vitrine continuam por comprovar na E1. Sequência E1 proposta em sequencia-e1-para-autorizacao.md: quatro publicações separadas (cadastro, preço, foto, ocultação), produto novo ilustrativo e original preservado. Aguardar autorização própria. Registro pós-deploy e sequência preparados somente localmente; não houve segundo commit/push. O produto untracked do teste local foi preservado sem publicação.
+
+
+## E1: quatro gravações concluídas; aceite de cache pendente
+
+Sequência autorizada executada inteiramente pelo CMS: 8c939d2 cadastro; cdc4ac8 preço; 38e3335 foto/alt; 0c39657 ocultação. Cada commit teve check Pages success, conferência e relato ao responsável antes da operação seguinte. Original e IDs preservados; teste ficou cadastrado, oculto, R$ 159,90 e foto clara.
+
+Pendência: o início e JSON público atuais omitem o teste; detalhe consultado com query retorna 404, mas a URL canônica sem parâmetros ainda serve HTML anterior com 200, CF-Cache-Status HIT e s-maxage=604800. Portanto não considerar o aceite de ocultação concluído. Relato inicial foi corrigido e evidências registradas em [resultado-e1.md](resultado-e1.md). Investigar política/invalidação de cache e submeter correção local antes de qualquer publicação adicional. Não foi feita quinta gravação/deploy. E2 ainda não iniciada.
+
+
+## Correção local da pendência de cache E1
+
+Investigação/local autorizadas pelo responsável; nenhum commit/push, deploy, gravação CMS ou purge. Comparações mostraram versões antigas de preço/foto e URL oculta ainda 200 por cache compartilhado. Build isolado de origin/main comprovou saída correta antes da mudança. Aplicada localmente política no-store ao HTML mutável e adicionado verificador que exige URL canônica; 20 testes, tipos e build final aprovados na réplica isolada. Prévia em http://127.0.0.1:4323/. Produto original, IDs e teste oculto preservados.
+
+Relatório em [correcao-cache-e1.md](correcao-cache-e1.md). A origem administrativa da política de cache ainda requer inspeção; patch local não comprova remoção retroativa. Próximo: revisão do patch e autorização própria de commit/push/deploy; eventuais purge/alterações remotas ou novas gravações CMS dependem de autorização específica. E1 permanece pendente de validação remota, E2 não iniciada.

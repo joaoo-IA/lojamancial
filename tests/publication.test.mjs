@@ -1,0 +1,7 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {verifyPublication} from '../scripts/verify-publication.mjs';
+const opts={base:'https://loja.test',commit:'12345678abcdef',id:'teste',visible:false};
+function mock({status=404,old=false,visible=false}={}){return async input=>{const u=new URL(input);assert.equal(u.search,'','Aceite não deve usar query');if(u.pathname==='/build-info.json')return Response.json({commit:opts.commit});if(u.pathname==='/catalogo.json')return Response.json({produtos:visible?[{id:'teste',precoCentavos:15990,foto:'/media/claro.svg'}]:[]});if(u.pathname==='/')return new Response('12345678'+(visible?' data-product-id="teste"':''));return new Response(old?'versão antiga': '12345678 159,90 /media/claro.svg',{status});};}
+test('aceita oculto somente com URL exata 404 e versão atual',async()=>assert.equal((await verifyPublication(opts,mock())).detailStatus,404));
+test('rejeita URL canônica 200 apesar de JSON correto',async()=>assert.rejects(verifyPublication(opts,mock({status:200,old:true}))));
+test('rejeita HTML de preço/foto antigo apesar de JSON novo',async()=>assert.rejects(verifyPublication({...opts,visible:true,price:15990,photo:'/media/claro.svg'},mock({visible:true,status:200,old:true}))));
+test('aceita preço e foto atuais na URL exata',async()=>assert.equal((await verifyPublication({...opts,visible:true,price:15990,photo:'/media/claro.svg'},mock({visible:true,status:200}))).canonical,true));

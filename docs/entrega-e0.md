@@ -71,3 +71,10 @@ Revisar E0 localmente, incluindo a navegação/descarte que a ferramenta não co
 O responsável confirmou a revisão local dos campos/controles e autorizou explicitamente commit e push da E0 e documentação para main, acompanhamento do deploy e conferência do editor publicado. Autorização desta entrega; não abrange gravações E1. Produto local adicional a6398c21-beed-4eae-84db-ef2f88123d64.json encontrado como untracked na retomada: preservado, não staged/não publicado. Ele não informa variacoes e não foi incluído na validação/build histórico da E0; não corrigir ou remover por inferência. A validação Cloudflare usará somente conteúdo versionado.
 
 Implementação de aplicação mantém-se idêntica à versão local já verificada com tipos, 14 testes e build aprovados. Revisão atual: Git/diff conferidos, main sem divergência de origin/main; nenhuma dependência instalada. Publicação em andamento.
+
+
+## E0 publicada e conferida; E1 preparada
+
+Commit 03af6523a19cdb7a31d707fcfe06cea5b6800189 criado e enviado para main sob autorização específica. Check Cloudflare Pages completed/success; produção confirmou o commit e geração 2026-11-24T01:49:35.286Z (23/11/2026, 22h49min35s em Brasília). No navegador público autenticado, entrada original carregada com formulário visível, 11 campos input/textarea, root 673,5 px e largura 1280 px numa viewport 1280 × 720. Captura em artifacts/e0-publicada/editor-publico.jpg. Nenhum campo alterado ou ação de salvar/publicar executada. HTTP confirmou que catálogo público continua com apenas o produto original a 14990 centavos.
+
+E0 aceita localmente pelo responsável e publicada; reflexos de gravação do CMS na vitrine continuam por comprovar na E1. Sequência E1 proposta em sequencia-e1-para-autorizacao.md: quatro publicações separadas (cadastro, preço, foto, ocultação), produto novo ilustrativo e original preservado. Aguardar autorização própria. Registro pós-deploy e sequência preparados somente localmente; não houve segundo commit/push. O produto untracked do teste local foi preservado sem publicação.
