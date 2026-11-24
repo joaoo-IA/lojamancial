@@ -1,6 +1,6 @@
 # Prova funcional da administração
 
-Estado: commit e push para main e deploy das correções Decap/OAuth explicitamente autorizados nesta entrega. Publicação e conferência do painel em andamento. Gravações pelo CMS permanecem sem autorização.
+Estado atual: E0 implementada localmente para revisão; tipos/build/14 testes aprovados. Roteiro manual inclui navegação de descarte não confirmada pela automação. Commit/push/deploy e E1 aguardam aprovação.
 
 ## Origem e limites
 
@@ -65,3 +65,39 @@ Prévia para revisão: http://127.0.0.1:4321/admin/. Código de aplicação perm
 O responsável declarou: Autorizo o commit e o push dessas correções para a main e o deploy. Depois confira o painel público e me envie o link funcionando. Escopo: correção da seleção inválida de biblioteca do Decap, normalização defensiva do Client ID nas duas etapas OAuth, testes de regressão e documentação já apresentada. Destino: main de joaoo-IA/lojamancial, acionando o Cloudflare Pages de produção. Esta autorização vale somente para essa entrega e não inclui salvar produtos ou imagens pelo CMS.
 
 Verificações locais anteriores desta mesma versão de código: 22 arquivos sem erros/avisos, 14 testes e build aprovados. Na revisão de publicação: diff e destino conferidos; origin/main atualizado sem divergência; não houve instalação de dependências ou mudança de produtos. Próximo critério: confirmar o commit servido em build-info.json e observar o painel público sem o erro de configuração. Login real e prova do catálogo continuam como etapas próprias.
+
+
+## Resultado da publicação autorizada — 23/11/2026
+
+Commit 49e5b6bce96947726fd08dc5ac3c40b425c3ba55 criado e enviado para origin/main com sucesso. Check Cloudflare Pages completed/success; build-info.json confirmou esse commit em produção e geração 2026-11-23T23:57:04.946Z (20h57min04s em Brasília). Nenhum produto ou imagem foi alterado.
+
+HTTP: config pública sem media_library global inválida, limite de foto 5242880 bytes preservado, backend main/origem oficial corretos; autorização respondeu 302 com Client ID exato de 20 caracteres e callback correto. Navegador real, aba do painel público recarregada: botão Entrar com o GitHub visível, sem erro de configuração. Captura e resumo sem credenciais em artifacts/visual/2026-11-23-publicacao-49e5b6b (ignorado pelo Git).
+
+Concluído: commit, push, deploy e conferência da tela de acesso públicos. Pendente: entrada completa no painel pelo responsável e sequência de cadastro/preço/foto/ocultação, com autorização própria antes de gravar. Próxima entrega: validar a sessão do CMS e apresentar a sequência de teste para aprovação. Este registro pós-publicação permanece local, sem segundo commit/push automático. As autorizações desta entrega não se estendem a futuras alterações.
+
+
+## Revisão de andamento e proposta de evolução — 23/11/2026
+
+Solicitação do responsável: inspecionar o estado real, conferir o editor em branco e propor entregas até a V1 completa, sem nova implementação. Foram relidos integralmente os dois PDFs (15 + 3 páginas); os 15 rascunhos foram renderizados e revistos. A proposta completa consta em [plano-evolucao-v1.md](plano-evolucao-v1.md), com estado de proposta, dependências e critérios de aceite. A prova original permanece o marco ativo.
+
+Evidência nova: sessão do painel público autenticada; coleção Produtos lista o exemplo; a entrada carrega campos e dados no DOM/árvore de acessibilidade. Screenshot permanece em branco porque #nc-root e o contêiner rolável do formulário têm altura 0 px; área ancestral absoluta de 66 px com overflow hidden recorta os campos. Código do painel aplica position:relative ao root sem altura. Confirmada falha de layout; não é formulário ainda ausente do projeto. preview:false desliga somente a prévia, não o formulário. Não foram alterados campos ou acionados salvar/publicar.
+
+Concluído nesta revisão: leitura/inspeção, acesso autenticado de leitura, confirmação do commit público 49e5b6b e diagnóstico visual. Pendente: corrigir dimensionamento, revisar localmente e autorizar sua publicação; depois autorizar e executar prova real de cadastro/preço/foto/ocultação e respectivos builds. Próxima entrega recomendada E0 (2–4 h), ainda aguardando decisão do responsável. E1 encerra a prova; E2–E8 são evolução proposta, não trabalho já autorizado.
+
+Verificações desta revisão: git status e diff preservados, leitura de arquivos, HTTP de build-info/catalogo/config, inspeção DOM somente de leitura, captura do editor, extração integral com pypdf e renderização Poppler dos rascunhos. PyMuPDF não está instalado no runtime; usada a alternativa já disponível, sem instalar dependências. Poppler emitiu avisos de fontes Symbol/ArialUnicode, mas gerou as 15 páginas; todas foram conferidas em folhas de contato e produto/painel também em imagem ampliada. Histórico de 14 testes/build continua identificado como anterior; não se repetiu infraestrutura/testes pois aplicação não foi alterada.
+
+Nenhuma gravação pelo CMS, alteração de aplicação/produto, instalação, commit ou push nesta revisão. Evidências ignoradas pelo Git em artifacts/revisao-v1; nenhum token/secret consultado.
+
+
+## E0 local — implementação para revisão
+
+O responsável aprovou E0–E8 como referência e autorizou implementar somente E0 localmente (ADR-003). Corrigidas altura do root/documento e largura/barra do editor em telas estreitas, no único arquivo de aplicação src/pages/admin/index.astro. Build final, tipos, 14 testes e conferência da saída aprovados. Local ativo em http://127.0.0.1:4322/ e /admin/, com proxy fs somente loopback na 8081. Conteúdo/IDs e limite de 5 MB preservados. Sem commit/push/deploy ou gravação CMS.
+
+Entrega, capturas, roteiro e limites em [entrega-e0.md](entrega-e0.md). Observados listagem, edição, nova entrada, controles e foco/rolagem em desktop e mobile. O retorno após descartar entrada não salva não foi confirmado pela ferramenta por timeout; o roteiro manual inclui esse passo. E0 aguarda revisão/aceite; publicação e repetição autenticada pública pendentes. E1 ainda sem execução; E2–E8 aprovadas como referência e não iniciadas.
+
+
+## Aceite local e autorização de publicação E0
+
+O responsável confirmou a revisão local dos campos/controles e autorizou explicitamente commit e push da E0 e documentação para main, acompanhamento do deploy e conferência do editor publicado. Autorização desta entrega; não abrange gravações E1. Produto local adicional a6398c21-beed-4eae-84db-ef2f88123d64.json encontrado como untracked na retomada: preservado, não staged/não publicado. Ele não informa variacoes e não foi incluído na validação/build histórico da E0; não corrigir ou remover por inferência. A validação Cloudflare usará somente conteúdo versionado.
+
+Implementação de aplicação mantém-se idêntica à versão local já verificada com tipos, 14 testes e build aprovados. Revisão atual: Git/diff conferidos, main sem divergência de origin/main; nenhuma dependência instalada. Publicação em andamento.
