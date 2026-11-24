@@ -4,7 +4,7 @@
   "descricao": "Produto ilustrativo para validar administração e publicação. Sem oferta de venda.",
   "precoCentavos": 15990,
   "categoria": "Conjuntos",
-  "visivel": true,
+  "visivel": false,
   "foto": "/media/conjunto-claro.svg",
   "fotoAlt": "Ilustração de top e legging em cinza claro.",
   "pecasIncluidas": "Top e legging",
