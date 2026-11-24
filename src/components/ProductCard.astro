@@ -1,0 +1,4 @@
+---
+import type {Produto} from '../lib/catalogo';import {dinheiro} from '../lib/catalogo';interface Props{produto:Produto}const {produto:p}=Astro.props;
+---
+<article class="product-card" data-product-id={p.id}><a class="card-image" href={'/produto/'+p.id+'/'} aria-label={'Ver '+p.nome}><img src={p.foto} alt={p.fotoAlt} width="800" height="1000" loading="lazy" />{p.novidade&&<span class="badge">Novidade</span>}<span class="illustration-tag">Ilustração</span></a><div class="card-copy"><p class="eyebrow">{p.categoria}</p><h3><a href={'/produto/'+p.id+'/'}>{p.nome}</a></h3><p class="price">{dinheiro(p.precoCentavos)}</p><p class="card-variants">{[...new Set(p.variacoes.map(v=>v.cor))].join(' · ')}</p></div></article>

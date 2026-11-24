@@ -1,0 +1,9 @@
+{
+  "id": "cat-shorts",
+  "nome": "Shorts",
+  "slug": "shorts",
+  "imagem": "/media/e2-shorts-grafite.svg",
+  "alt": "Ilustração de shorts",
+  "ordem": 4,
+  "visivel": true
+}

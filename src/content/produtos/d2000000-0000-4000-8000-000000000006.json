@@ -1,0 +1,34 @@
+{
+  "id": "d2000000-0000-4000-8000-000000000006",
+  "nome": "Blusa Cotidiana",
+  "descricao": "Uma peça para acompanhar o movimento, com linhas simples e conforto no dia a dia. Conteúdo ilustrativo substituível; não representa oferta de venda.",
+  "categoriaId": "cat-blusas",
+  "categoria": "Blusas",
+  "precoCentavos": 6990,
+  "visivel": true,
+  "foto": "/media/e2-blusa-grafite.svg",
+  "fotoAlt": "Ilustração de Blusa Cotidiana em grafite",
+  "galeria": [
+    {
+      "foto": "/media/e2-blusa-claro.svg",
+      "alt": "Ilustração de Blusa Cotidiana em claro"
+    }
+  ],
+  "guiaMedidasId": "guia-corpo",
+  "pecasIncluidas": "Uma peça avulsa",
+  "novidade": false,
+  "destaque": false,
+  "ordem": 6,
+  "variacoes": [
+    {
+      "id": "d2000000-0000-4000-8000-000000000006-grafite-m",
+      "cor": "Grafite",
+      "tamanho": "M"
+    },
+    {
+      "id": "d2000000-0000-4000-8000-000000000006-claro-g",
+      "cor": "Cinza claro",
+      "tamanho": "G"
+    }
+  ]
+}

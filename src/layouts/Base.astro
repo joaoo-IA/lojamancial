@@ -1,16 +1,5 @@
 ---
-import '../styles/global.css';
-import { buildInfo } from '../lib/publicacao';
-interface Props { title: string; description?: string }
-const { title, description = 'Prova de administração da loja. Produtos e imagens ilustrativos.' } = Astro.props;
+import {isPreviewDemo} from '../lib/preview';
+import '../styles/global.css';import Header from '../components/Header.astro';import {loja} from '../lib/conteudo';import {buildInfo} from '../lib/publicacao';interface Props{title:string;description?:string}const {title,description='Uma coleção ilustrativa de roupas para o movimento e o cotidiano.'}=Astro.props;const info=loja();
 ---
-<!doctype html>
-<html lang="pt-BR">
-<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" content={description} /><meta name="robots" content="noindex, nofollow" /><title>{title} · LOJA</title><link rel="icon" href="/favicon.svg" type="image/svg+xml" /></head>
-<body>
-<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
-<div class="notice">EM DESENVOLVIMENTO · PRODUTOS ILUSTRATIVOS · SEM VENDAS</div>
-<header class="header shell"><a class="wordmark" href="/">LOJA<span>movimento & cotidiano</span></a><nav aria-label="Navegação principal"><a href="/#produto">A coleção</a><a href="/publicacao/">Publicações</a><a class="admin-link" href="/admin/">Administrar <span aria-hidden="true">＋</span></a></nav></header>
-<main id="conteudo"><slot /></main>
-<footer class="footer shell"><div><a class="wordmark" href="/">LOJA</a><p>O começo de uma nova coleção.</p></div><div><p>Prova funcional da administração</p><a href="/publicacao/">Versão ativa: <code>{buildInfo.commit.slice(0, 8)}</code></a></div></footer>
-</body></html>
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content={description}/><meta name="robots" content="noindex,nofollow"/><link rel="icon" href="/favicon.svg"/><title>{title} · {info.nome}</title></head><body><a class="skip-link" href="#conteudo">Pular para o conteúdo</a><div class="notice">{isPreviewDemo() ? 'PRÉVIA E2 · TESTES · SEM VENDAS · PAINEL DEMONSTRATIVO' : 'COLEÇÃO ILUSTRATIVA · EM DESENVOLVIMENTO · SEM VENDAS'}</div><Header/><main id="conteudo"><slot/></main><footer class="site-footer"><div class="shell footer-grid"><div><a class="brand" href="/">{info.nome}<span>{info.subtitulo}</span></a><p>Seu movimento tem espaço aqui.</p></div><div><h2>Explore</h2><a href="/#colecao">A coleção</a><a href="/demonstracao/#categorias">Categorias</a><a href="/demonstracao/#medidas">Medidas ilustrativas</a></div><div><h2>Atendimento</h2><p>{info.atendimento}</p><p>{info.entrega}</p></div></div><div class="shell footer-utility"><span>Prévia ilustrativa · identidade em construção</span><nav aria-label="Ferramentas da administração"><a href="/admin/">Administrar</a><a href="/publicacao/">Publicações · <code>{buildInfo.commit.slice(0,8)}</code></a><a href="/demonstracao/">Base E2</a></nav></div></footer></body></html>

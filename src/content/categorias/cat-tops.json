@@ -1,0 +1,9 @@
+{
+  "id": "cat-tops",
+  "nome": "Tops",
+  "slug": "tops",
+  "imagem": "/media/e2-top-grafite.svg",
+  "alt": "Ilustração de tops",
+  "ordem": 2,
+  "visivel": true
+}

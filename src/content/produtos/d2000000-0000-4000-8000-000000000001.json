@@ -1,0 +1,34 @@
+{
+  "id": "d2000000-0000-4000-8000-000000000001",
+  "nome": "Conjunto Ritmo",
+  "descricao": "Uma peça para acompanhar o movimento, com linhas simples e conforto no dia a dia. Conteúdo ilustrativo substituível; não representa oferta de venda.",
+  "categoriaId": "cat-conjuntos",
+  "categoria": "Conjuntos",
+  "precoCentavos": 16990,
+  "visivel": true,
+  "foto": "/media/e2-conjunto-grafite.svg",
+  "fotoAlt": "Ilustração de Conjunto Ritmo em grafite",
+  "galeria": [
+    {
+      "foto": "/media/e2-conjunto-claro.svg",
+      "alt": "Ilustração de Conjunto Ritmo em claro"
+    }
+  ],
+  "guiaMedidasId": "guia-corpo",
+  "pecasIncluidas": "Top e legging",
+  "novidade": true,
+  "destaque": true,
+  "ordem": 1,
+  "variacoes": [
+    {
+      "id": "d2000000-0000-4000-8000-000000000001-grafite-m",
+      "cor": "Grafite",
+      "tamanho": "M"
+    },
+    {
+      "id": "d2000000-0000-4000-8000-000000000001-claro-g",
+      "cor": "Cinza claro",
+      "tamanho": "G"
+    }
+  ]
+}

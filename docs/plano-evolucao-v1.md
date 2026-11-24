@@ -1,6 +1,6 @@
 # Evolução da loja até a V1 — referência aprovada
 
-Data: 23/11/2026. Estado atual: aprovado pelo responsável como referência E0–E8; somente implementação/verificação local da E0 autorizadas. E0 preparada para revisão, com limitação de navegação automatizada descrita em entrega-e0.md. Commit, push, deploy e E1 dependem de aprovações próprias. Histórico das propostas preservado abaixo.
+Estado vigente em 24/11/2026: E0 publicada; aceite de cache E1 pendente. E2 local revisada e Preview autorizado exclusivamente na branch codex/e2-preview, com painel demonstrativo isolado. Main não tem autorização de merge/push. Ver preview-e2.md e ADR-006. Registros anteriores permanecem históricos.
 
 ## Referências e decisões preservadas
 
@@ -223,3 +223,28 @@ Pendência: o início e JSON público atuais omitem o teste; detalhe consultado 
 Investigação/local autorizadas pelo responsável; nenhum commit/push, deploy, gravação CMS ou purge. Comparações mostraram versões antigas de preço/foto e URL oculta ainda 200 por cache compartilhado. Build isolado de origin/main comprovou saída correta antes da mudança. Aplicada localmente política no-store ao HTML mutável e adicionado verificador que exige URL canônica; 20 testes, tipos e build final aprovados na réplica isolada. Prévia em http://127.0.0.1:4323/. Produto original, IDs e teste oculto preservados.
 
 Relatório em [correcao-cache-e1.md](correcao-cache-e1.md). A origem administrativa da política de cache ainda requer inspeção; patch local não comprova remoção retroativa. Próximo: revisão do patch e autorização própria de commit/push/deploy; eventuais purge/alterações remotas ou novas gravações CMS dependem de autorização específica. E1 permanece pendente de validação remota, E2 não iniciada.
+
+
+## Patch publicado — aceite remoto ainda pendente
+
+Commit f8fbe1578804d0ee3d95411e99d88b25d0fbf9ef enviado por autorização específica. Deploy 73e850be-7935-464b-aca2-62633a1b2b6b concluído success; versão pública e início corretos. Conferência canônica do produto original aprovada: preço 14990, foto grafite e SHA atual; catálogo omite teste. Três headers no-store aplicados ao HTML, confirmados por HTTP e aba Headers do deployment na conta autenticada.
+
+Falha persistente: URL exata do teste no alias principal retorna 200, HTML 38e3335c, HIT/Age superior a 2100 s, embora os novos headers já apareçam nessa resposta. O mesmo caminho no deployment imutável 73e850be.lojamancial.pages.dev retorna 404 atual, sem HIT. Isso localiza a divergência na entrega em cache do alias de produção. Retenção de assets por até uma semana descrita pelo Pages é compatível com o s-maxage anterior, mas a origem exata da política interna não foi comprovada como uma regra personalizada do usuário.
+
+Inspeção somente leitura da conta após login pelo responsável: Build cache Disabled, nenhum custom domain, nenhuma ação de purge de conteúdo nas configurações/menu de projeto inspecionados. Nenhum secret revelado. Não indicar limpeza de zona própria para pages.dev. Próxima ação proposta: encaminhar ao canal Cloudflare disponível o pedido preparado em correcao-cache-e1.md para invalidar somente as quatro URLs listadas e esclarecer a retenção gerenciada; envio e purge aguardam autorização separada. Não realizado purge, nova gravação CMS, rollback ou outro deploy.
+
+E1: quatro gravações comprovadas, mas aceite de ocultação NÃO concluído; verificador canônico falhou corretamente (200 em vez de 404). E2: escopo apresentado em escopo-e2.md, ainda não iniciada, condicionado à resolução/revisão da E1. Evidências em artifacts/cache-publicado. Documentação pós-deploy atualizada somente localmente, sem segundo commit/push.
+
+
+## Estado vigente — E2 local para revisão (24/11/2026)
+
+O responsável autorizou explicitamente iniciar E2 local mantendo a pendência E1, alterando a dependência de sequência anterior sem dar aceite à ocultação. Ver [ADR-005](decisoes/ADR-005-E2-local-com-E1-pendente.md). E0 publicada; E1 tem quatro gravações/deploys comprovados e patch publicado, mas cache canônico ainda com aceite aberto segundo a última evidência remota. Não houve nova gravação remota, purge ou contato nesta E2.
+
+E2 local implementada: base neutra, navegação móvel, cards/galeria/tabela, cinco categorias e formulários/modelos de conteúdo. 8 exemplos visíveis; original e teste oculto preservados. Tipos (32 arquivos), 24 testes, build/saída e revisão responsiva aprovados. Entrega isolada em artifacts/e2-workspace, ativa na porta 4324, CMS local na 8082. [Links, roteiro e limitações](entrega-e2.md). E2 aguarda revisão/aceite; commit, push, deploy e qualquer gravação CMS remota continuam sem autorização. E3: compor inicial completa após revisão e autorização própria. Busca/filtros E4, produto/pedido individual E5, carrinho E6, informações E7, aceite integrado E8. Os registros anteriores permanecem históricos.
+
+Pedido Cloudflare completo e canais/requisitos/custo em [correcao-cache-e1.md](correcao-cache-e1.md); preparado e não enviado. A causa interna exata segue hipótese, não fato comprovado. E2 não foi usada como evidência de resolução da E1.
+
+
+## Autorização E2 Preview — 24/11/2026
+
+O responsável autorizou commit/push exclusivamente na branch codex/e2-preview e publicação Preview, sem merge/push na main ou mudanças da conta. A autorização local anterior foi ampliada somente para essa prévia. Painel demonstrativo em memória, sem OAuth/GitHub; alterações não publicam a vitrine. E1 continua pendente. Ver [preview-e2.md](preview-e2.md) e [ADR-006](decisoes/ADR-006-E2-preview-isolado.md). Deploy/conferência em andamento; não declarar publicado antes de sucesso e HTTP/browser remotos.

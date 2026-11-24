@@ -1,0 +1,5 @@
+---
+import type {Produto} from '../lib/catalogo';import {fotosDoProduto} from '../lib/catalogo';interface Props{produto:Produto}const {produto:p}=Astro.props;const fotos=fotosDoProduto(p);
+---
+<div class="gallery" data-gallery><div class="gallery-main"><img data-main src={fotos[0].foto} alt={fotos[0].alt} width="800" height="1000"/><span class="illustration-tag">Imagem ilustrativa</span></div>{fotos.length>1&&<div class="thumbnails" aria-label="Fotos do produto">{fotos.map((f,i)=><button type="button" aria-label={'Ver imagem '+(i+1)+': '+f.alt} aria-pressed={i===0?'true':'false'} data-photo={f.foto} data-alt={f.alt}><img src={f.foto} alt="" width="80" height="100"/></button>)}</div>}</div>
+<script>document.querySelectorAll<HTMLElement>('[data-gallery]').forEach(g=>{const main=g.querySelector<HTMLImageElement>('[data-main]');g.querySelectorAll<HTMLButtonElement>('[data-photo]').forEach(b=>b.addEventListener('click',()=>{if(!main)return;main.src=b.dataset.photo!;main.alt=b.dataset.alt!;g.querySelectorAll('[aria-pressed]').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');}));});</script>

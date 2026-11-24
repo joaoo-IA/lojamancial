@@ -1,0 +1,4 @@
+---
+import type {Guia} from '../lib/conteudo';interface Props{guia:Guia}const {guia:g}=Astro.props;
+---
+<div class="measure-guide"><p class="notice-inline">{g.nota}</p><div class="table-scroll" tabindex="0" role="region" aria-label="Tabela de medidas, em centímetros"><table><caption>{g.nome} · medidas em cm</caption><thead><tr><th scope="col">Tamanho</th><th scope="col">Busto</th><th scope="col">Cintura</th><th scope="col">Quadril</th></tr></thead><tbody>{g.linhas.map(r=><tr><th scope="row">{r.tamanho}</th><td>{r.busto??'—'}</td><td>{r.cintura}</td><td>{r.quadril}</td></tr>)}</tbody></table></div></div>

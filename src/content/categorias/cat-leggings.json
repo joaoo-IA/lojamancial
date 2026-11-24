@@ -1,0 +1,9 @@
+{
+  "id": "cat-leggings",
+  "nome": "Leggings",
+  "slug": "leggings",
+  "imagem": "/media/e2-legging-grafite.svg",
+  "alt": "Ilustração de leggings",
+  "ordem": 3,
+  "visivel": true
+}

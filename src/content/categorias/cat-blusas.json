@@ -1,0 +1,9 @@
+{
+  "id": "cat-blusas",
+  "nome": "Blusas",
+  "slug": "blusas",
+  "imagem": "/media/e2-blusa-grafite.svg",
+  "alt": "Ilustração de blusas",
+  "ordem": 1,
+  "visivel": true
+}

@@ -1,0 +1,31 @@
+{
+  "id": "guia-corpo",
+  "nome": "Referência de medidas",
+  "nota": "Tabela ilustrativa para testar a apresentação. Não utilize estes valores para escolher um tamanho real.",
+  "linhas": [
+    {
+      "tamanho": "P",
+      "busto": 84,
+      "cintura": 66,
+      "quadril": 92
+    },
+    {
+      "tamanho": "M",
+      "busto": 90,
+      "cintura": 72,
+      "quadril": 98
+    },
+    {
+      "tamanho": "G",
+      "busto": 96,
+      "cintura": 78,
+      "quadril": 104
+    },
+    {
+      "tamanho": "GG",
+      "busto": 102,
+      "cintura": 84,
+      "quadril": 110
+    }
+  ]
+}

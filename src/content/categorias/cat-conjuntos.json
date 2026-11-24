@@ -1,0 +1,9 @@
+{
+  "id": "cat-conjuntos",
+  "nome": "Conjuntos",
+  "slug": "conjuntos",
+  "imagem": "/media/e2-conjunto-grafite.svg",
+  "alt": "Ilustração de conjuntos",
+  "ordem": 0,
+  "visivel": true
+}

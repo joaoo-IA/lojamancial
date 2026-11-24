@@ -1,0 +1,34 @@
+{
+  "id": "d2000000-0000-4000-8000-000000000002",
+  "nome": "Blusa Leve",
+  "descricao": "Uma peça para acompanhar o movimento, com linhas simples e conforto no dia a dia. Conteúdo ilustrativo substituível; não representa oferta de venda.",
+  "categoriaId": "cat-blusas",
+  "categoria": "Blusas",
+  "precoCentavos": 5990,
+  "visivel": true,
+  "foto": "/media/e2-blusa-grafite.svg",
+  "fotoAlt": "Ilustração de Blusa Leve em grafite",
+  "galeria": [
+    {
+      "foto": "/media/e2-blusa-claro.svg",
+      "alt": "Ilustração de Blusa Leve em claro"
+    }
+  ],
+  "guiaMedidasId": "guia-corpo",
+  "pecasIncluidas": "Uma peça avulsa",
+  "novidade": true,
+  "destaque": false,
+  "ordem": 2,
+  "variacoes": [
+    {
+      "id": "d2000000-0000-4000-8000-000000000002-grafite-m",
+      "cor": "Grafite",
+      "tamanho": "M"
+    },
+    {
+      "id": "d2000000-0000-4000-8000-000000000002-claro-g",
+      "cor": "Cinza claro",
+      "tamanho": "G"
+    }
+  ]
+}

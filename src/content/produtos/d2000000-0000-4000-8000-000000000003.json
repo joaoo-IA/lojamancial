@@ -1,0 +1,34 @@
+{
+  "id": "d2000000-0000-4000-8000-000000000003",
+  "nome": "Top Movimento",
+  "descricao": "Uma peça para acompanhar o movimento, com linhas simples e conforto no dia a dia. Conteúdo ilustrativo substituível; não representa oferta de venda.",
+  "categoriaId": "cat-tops",
+  "categoria": "Tops",
+  "precoCentavos": 7990,
+  "visivel": true,
+  "foto": "/media/e2-top-grafite.svg",
+  "fotoAlt": "Ilustração de Top Movimento em grafite",
+  "galeria": [
+    {
+      "foto": "/media/e2-top-claro.svg",
+      "alt": "Ilustração de Top Movimento em claro"
+    }
+  ],
+  "guiaMedidasId": "guia-corpo",
+  "pecasIncluidas": "Uma peça avulsa",
+  "novidade": true,
+  "destaque": false,
+  "ordem": 3,
+  "variacoes": [
+    {
+      "id": "d2000000-0000-4000-8000-000000000003-grafite-m",
+      "cor": "Grafite",
+      "tamanho": "M"
+    },
+    {
+      "id": "d2000000-0000-4000-8000-000000000003-claro-g",
+      "cor": "Cinza claro",
+      "tamanho": "G"
+    }
+  ]
+}
